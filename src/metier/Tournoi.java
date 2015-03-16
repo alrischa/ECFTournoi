@@ -1,11 +1,15 @@
 package metier;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.sql.Date;
+import java.util.Arrays;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import clientServeur.ITournoi;
 
@@ -19,7 +23,7 @@ import clientServeur.ITournoi;
 public class Tournoi implements Serializable, ITournoi{
 	//*******************************************************************************************************************************
 	//*******************************************************************************************************************************
-
+	
 	/**
 	 * 
 	 */
@@ -29,14 +33,18 @@ public class Tournoi implements Serializable, ITournoi{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@Column(nullable=false)
 	private int idTournoi;
-	private int idCreateur;
+	@JoinColumn(name="idUtilisateur",unique=true)
+	private Utilisateur createurTournoi;
 	private String nomTournoi;
 	private String lieuTournoi;
 	private int [][] classementTournoi;
 	private int jeuxTournoi;
 	private int etatTournoi;
+	@Temporal(TemporalType.DATE)
 	private Date datTournoi;
+	@Temporal(TemporalType.DATE)
 	private Date datLimInscrTournoi;
 	
 	
@@ -47,18 +55,18 @@ public class Tournoi implements Serializable, ITournoi{
 	}
 	
 	//Constructeur paramétré*********************************************************************************
-	//*******************************************************************************************************
-	public Tournoi(int idTournoi, int idCreateur, String nomTournoi,
-			Date datTournoi, Date datLimInscrTournoi, String lieuTournoi) {
+	//*******************************************************************************************************	
+	public Tournoi(int idTournoi, Utilisateur createur, String nomTournoi,
+			java.sql.Date datTournoi, java.sql.Date datLimInscrTournoi, String lieuTournoi) {
 		super();
 		this.idTournoi = idTournoi;
-		this.idCreateur = idCreateur;
+		this.createurTournoi = createur;
 		this.nomTournoi = nomTournoi;
 		this.datTournoi = datTournoi;
 		this.datLimInscrTournoi = datLimInscrTournoi;
 		this.lieuTournoi = lieuTournoi;
 	}
-	
+
 	//Methodes de la classe Tournoi**************************************************************************
 	//*******************************************************************************************************
 	@Override
@@ -93,12 +101,12 @@ public class Tournoi implements Serializable, ITournoi{
 		this.idTournoi = idTournoi;
 	}
 
-	public int getIdCreateur() {
-		return idCreateur;
+	public Utilisateur getCreateur() {
+		return createurTournoi;
 	}
 
-	public void setIdCreateur(int idCreateur) {
-		this.idCreateur = idCreateur;
+	public void setCreateur(Utilisateur createurTournoi) {
+		this.createurTournoi = createurTournoi;
 	}
 
 	public String getNomTournoi() {
@@ -118,7 +126,7 @@ public class Tournoi implements Serializable, ITournoi{
 	}
 
 	public Date getDatTournoi() {
-		return datTournoi;
+		return  datTournoi;
 	}
 
 	public void setDatTournoi(Date datTournoi) {
@@ -126,7 +134,7 @@ public class Tournoi implements Serializable, ITournoi{
 	}
 
 	public Date getDatLimInscrTournoi() {
-		return datLimInscrTournoi;
+		return  datLimInscrTournoi;
 	}
 
 	public void setDatLimInscrTournoi(Date datLimInscrTournoi) {
@@ -135,14 +143,13 @@ public class Tournoi implements Serializable, ITournoi{
 
 	@Override
 	public String toString() {
-		return "Tournoi [idTournoi=" + idTournoi + ", idCreateur=" + idCreateur
+		return "Tournoi [idTournoi=" + idTournoi + ", createur=" + createurTournoi
 				+ ", nomTournoi=" + nomTournoi + ", classementTournoi="
 				+ Arrays.toString(classementTournoi) + ", jeuxTournoi="
 				+ jeuxTournoi + ", etatTournoi=" + etatTournoi
 				+ ", datTournoi=" + datTournoi + ", datLimInscrTournoi="
 				+ datLimInscrTournoi + "]";
 	}
-
 	public String getLieuTournoi() {
 		return lieuTournoi;
 	}
@@ -166,5 +173,4 @@ public class Tournoi implements Serializable, ITournoi{
 	public void setEtatTournoi(int etatTournoi) {
 		this.etatTournoi = etatTournoi;
 	}
-
 }

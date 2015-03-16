@@ -14,7 +14,9 @@ public interface IInscriptionTournoi {
 	//*******************************************************************************************************************************
 	//*******************************************************************************************************************************
 
-	public void inscrireTournoi (Tournoi tournoi, Utilisateur utilisateur) throws DaoException;
-	public void desinscrireTournoi (Tournoi tournoi, Utilisateur utilisateur) throws DaoException;
+	//*******************************************************************************************************************************
+	//*******************************************************************************************************************************
+	public void inscrireTournoi (Tournoi tournoi, Utilisateur utilisateur)throws DaoException;
+	public void desinscrireTournoi (Tournoi tournoi, Utilisateur utilisateur)throws DaoException;
 	
 }

@@ -22,7 +22,8 @@ public interface ITournoiServices extends IConsultationTournoi, IGestionTournoi,
 	//*******************************************************************************************************************************
 	//*******************************************************************************************************************************
 		
-	public Tournoi creerTournoi (int idCreateur,String nomTournoi,Date datTournoi,Date datLimInscrTournoi, String lieuTournoi);
+
+	public Tournoi creerTournoi (Utilisateur createurTournoi,String nomTournoi,Date datTournoi,Date datLimInscrTournoi, String LieuTournoi);
 	public Tournoi modifierTournoi (Tournoi tournoi);
 	public void supprimerTournoi (Tournoi tournoi);
 	
